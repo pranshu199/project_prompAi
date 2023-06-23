@@ -1,10 +1,10 @@
 import Prompt from "@models/prompt";
 import { connectToDB } from "@utils/database";
 
+await connectToDB()
+
 export const GET = async (request, { params }) => {
     try {
-        await connectToDB()
-
         const prompt = await Prompt.findById(params.id).populate("creator")
         if (!prompt) return new Response("Prompt Not Found", { status: 404 });
 
@@ -19,7 +19,6 @@ export const PATCH = async (request, { params }) => {
     const { prompt, tag } = await request.json();
 
     try {
-        await connectToDB();
 
         // Find the existing prompt by ID
         const existingPrompt = await Prompt.findById(params.id);
