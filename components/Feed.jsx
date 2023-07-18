@@ -19,7 +19,6 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 const Feed = () => {
   const [allPosts, setAllPosts] = useState([]);
-console.log(allPosts);
   // Search states
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -29,11 +28,22 @@ console.log(allPosts);
    
   // };
 
-  useEffect(async () => {
-    const response =  await fetch("/api/prompt");
-    const data =  await response.json();
-
-    setAllPosts(data);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/prompt");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log(data);
+        setAllPosts(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
   }, []);
 
   const filterPrompts = (searchtext) => {
