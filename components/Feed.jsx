@@ -16,6 +16,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
       ))}
     </div>
   );
+  
 };
 const Feed = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -24,7 +25,6 @@ const Feed = () => {
   const [searchedResults, setSearchedResults] = useState([]);
 
   // const fetchPosts = async () => {
-   
   // };
 
   useEffect(() => {
